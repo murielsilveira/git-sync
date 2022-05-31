@@ -2,7 +2,8 @@
 
 ## Idea
 
-Create a Go cli that goes through directories, finds git repositories, and `git fetch`s them.
+Create a CLI that finds git repositories in a path and `git fetch`s them.
+
 I'm already manually doing this in a bunch of repositories, automate that would be nice, and I can even learn some Go in the process.
 
 ### Commands
@@ -12,11 +13,6 @@ I'm already manually doing this in a bunch of repositories, automate that would 
 - `--recursive`: goes deeper than just 1 level in the folders tree.
 - `--pull`: also pulls the current branch.
 
-### Process
-
-- Make it work with a fixed directory.
-- Make a cli out of it.
-
 ### Tasks
 
 - [x] List directories based on a fixed path.
@@ -25,6 +21,10 @@ I'm already manually doing this in a bunch of repositories, automate that would 
 - [ ] Execute a shell command on that directory.
 - [ ] Sync one directory at a time.
 - [ ] Use some Go concurrecy shenanigans to speed up the process.
+- [ ] Create a CLI.
+- [ ] Release it with https://goreleaser.com/.
+- [ ] Refine API ideas.
+- [ ] Implement API ideas.
 
 ### Features
 
