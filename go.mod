@@ -1,3 +1,3 @@
 module github.com/murielsilveira/git-sync
 
-go 1.17
+go 1.18
