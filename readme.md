@@ -18,8 +18,8 @@ I'm already manually doing this in a bunch of repositories, automate that would 
 - [x] List directories based on a fixed path.
 - [x] Figures it out if it's a git repository.
 - [x] Collect all repositories to be synced.
-- [ ] Execute a shell command on that directory.
-- [ ] Sync one directory at a time.
+- [x] Execute a shell command on that directory.
+- [x] Sync one directory at a time.
 - [ ] Use some Go concurrecy shenanigans to speed up the process.
 - [ ] Create a CLI.
 - [ ] Release it with https://goreleaser.com/.

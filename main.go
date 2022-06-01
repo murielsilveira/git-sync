@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"os/exec"
 	"time"
 )
 
@@ -12,7 +13,14 @@ func main() {
 	root := "/Users/muriel/projects"
 	repos := []string{}
 	repos = findReposOnPath(root, repos)
-	fmt.Println(len(repos))
+
+	for i, repo := range repos {
+		fmt.Printf("pulling %d of %d %s\n", i+1, len(repos), repo)
+		_, err := exec.Command("git", "-C", repo, "pull", "-p").Output()
+		if err != nil {
+			fmt.Printf("failed to pull %v => %v\n", repo, err)
+		}
+	}
 
 	fmt.Println()
 }
@@ -27,7 +35,6 @@ func findReposOnPath(path string, repos []string) []string {
 
 			if isRepo {
 				repos = append(repos, fullPath)
-				log("%s\n", fullPath)
 			} else {
 				repos = findReposOnPath(fullPath, repos)
 			}
@@ -41,12 +48,4 @@ func folderExists(path string) bool {
 	_, err := os.Stat(path)
 	hasFolder := !os.IsNotExist(err)
 	return hasFolder
-}
-
-func log(format string, a ...any) (n int, err error) {
-	debug := true
-	if debug {
-		return fmt.Fprintf(os.Stdout, format, a...)
-	}
-	return
 }
