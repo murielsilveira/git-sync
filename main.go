@@ -15,8 +15,15 @@ func main() {
 	repos = findReposOnPath(root, repos)
 
 	for i, repo := range repos {
-		fmt.Printf("pulling %d of %d %s\n", i+1, len(repos), repo)
-		_, err := exec.Command("git", "-C", repo, "pull", "-p").Output()
+		fmt.Printf("%d of %d %s\n", i+1, len(repos), repo)
+
+		_, err := exec.Command("git", "-C", repo, "fetch", "-p", "-a").Output()
+		if err != nil {
+			fmt.Printf("failed to fetch %v => %v", repo, err)
+			continue
+		}
+
+		_, err = exec.Command("git", "-C", repo, "pull").Output()
 		if err != nil {
 			fmt.Printf("failed to pull %v => %v\n", repo, err)
 		}
