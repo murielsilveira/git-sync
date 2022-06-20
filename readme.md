@@ -20,11 +20,11 @@ I'm already manually doing this in a bunch of repositories, automate that would 
 - [x] Collect all repositories to be synced.
 - [x] Execute a shell command on that directory.
 - [x] Sync one directory at a time.
-- [ ] Use some Go concurrecy shenanigans to speed up the process.
+- [ ] Add path support.
 - [ ] Create a CLI.
 - [ ] Release it with https://goreleaser.com/.
-- [ ] Refine API ideas.
-- [ ] Implement API ideas.
+- [ ] Use some Go concurrecy shenanigans to speed up the process.
+- [ ] Refine API.
 
 ### Features
 
