@@ -14,10 +14,14 @@ func main() {
 	}
 	absPath, _ := filepath.Abs(path)
 
-	fmt.Println("updating projects on", absPath)
-
 	repos := []string{}
 	repos = findReposOnPath(absPath, repos)
+
+	if len(repos) == 0 {
+		fmt.Println("no git repositories found on", absPath)
+	} else {
+		fmt.Println("updating projects on", absPath)
+	}
 
 	for i, repo := range repos {
 		fmt.Printf("%d of %d %s\n", i+1, len(repos), repo)
