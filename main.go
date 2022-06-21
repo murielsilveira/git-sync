@@ -4,28 +4,33 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-	"time"
+	"path/filepath"
 )
 
 func main() {
-	fmt.Println(time.Now())
+	path, _ := os.Getwd()
+	if len(os.Args) > 1 {
+		path = os.Args[1]
+	}
+	absPath, _ := filepath.Abs(path)
 
-	root := "/Users/muriel/projects"
+	fmt.Println("updating projects on", absPath)
+
 	repos := []string{}
-	repos = findReposOnPath(root, repos)
+	repos = findReposOnPath(absPath, repos)
 
 	for i, repo := range repos {
 		fmt.Printf("%d of %d %s\n", i+1, len(repos), repo)
 
 		_, err := exec.Command("git", "-C", repo, "fetch", "-p", "-a").Output()
 		if err != nil {
-			fmt.Printf("failed to fetch %v => %v", repo, err)
+			fmt.Printf("\tfailed to fetch: %v\n", err)
 			continue
 		}
 
 		_, err = exec.Command("git", "-C", repo, "pull").Output()
 		if err != nil {
-			fmt.Printf("failed to pull %v => %v\n", repo, err)
+			fmt.Printf("\tfailed to pull: %v\n", err)
 		}
 	}
 
