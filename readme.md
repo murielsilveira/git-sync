@@ -25,6 +25,7 @@ I'm already manually doing this in a bunch of repositories, automate that would 
 - [ ] Release it with https://goreleaser.com/.
 - [ ] Use some Go concurrecy shenanigans to speed up the process.
 - [ ] Refine API.
+- [ ] Use git remote instead of .git folder.
 
 ### Features
 
