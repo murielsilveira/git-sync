@@ -14,14 +14,14 @@ func main() {
 	}
 	absPath, _ := filepath.Abs(path)
 
-	repos := []string{}
-	repos = findRepos(absPath, repos)
+	repos := findRepos(absPath)
 
 	if len(repos) == 0 {
 		fmt.Println("no git repositories found on", absPath)
-	} else {
-		fmt.Println("updating projects on", absPath)
+		return
 	}
+
+	fmt.Println("updating projects on", absPath)
 
 	for i, repo := range repos {
 		fmt.Printf("%d of %d %s\n", i+1, len(repos), repo)
@@ -47,19 +47,18 @@ func main() {
 			continue
 		}
 	}
-
-	fmt.Println()
 }
 
-func findRepos(path string, repos []string) []string {
+func findRepos(path string) []string {
 	if isRepo(path) {
 		return []string{path}
 	}
 
-	return findReposOnPath(path, repos)
+	repos := []string{}
+	return findReposRecursive(path, repos)
 }
 
-func findReposOnPath(path string, repos []string) []string {
+func findReposRecursive(path string, repos []string) []string {
 	dirs, _ := os.ReadDir(path)
 
 	for _, dir := range dirs {
@@ -69,7 +68,7 @@ func findReposOnPath(path string, repos []string) []string {
 			if isRepo(fullPath) {
 				repos = append(repos, fullPath)
 			} else {
-				repos = findReposOnPath(fullPath, repos)
+				repos = findReposRecursive(fullPath, repos)
 			}
 		}
 	}
