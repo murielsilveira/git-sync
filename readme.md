@@ -2,16 +2,14 @@
 
 ## Idea
 
-Create a CLI that finds git repositories in a path and `git fetch`s them.
+Create a CLI that finds git repositories in a path and `git fetch`s and `git pull`s them.
 
-I'm already manually doing this in a bunch of repositories, automate that would be nice, and I can even learn some Go in the process.
+I'm already manually doing this in a bunch of repositories, automating that would be nice, and I can even learn some Go in the process.
 
 ### Commands
 
-- `git-sync`: syncs the current directory git repositories (1st level folders only).
+- `git-sync`: syncs the current directory git repositories (all folders levels).
 - `git-sync <path>`: adds support to any (?) glob expression.
-- `--recursive`: goes deeper than just 1 level in the folders tree.
-- `--pull`: also pulls the current branch.
 
 ### Tasks
 
@@ -21,11 +19,14 @@ I'm already manually doing this in a bunch of repositories, automate that would 
 - [x] Execute a shell command on that directory.
 - [x] Sync one directory at a time.
 - [ ] Add path support.
+- [ ] Don't try to pull when the repo is not in a clean state.
 - [ ] Create a CLI.
 - [ ] Release it with https://goreleaser.com/.
 - [ ] Use some Go concurrecy shenanigans to speed up the process.
 - [ ] Refine API.
 - [ ] Use git remote instead of .git folder.
+- [ ] Add flag for pulling or not?
+- [ ] Add flat for remote?
 
 ### Features
 
@@ -36,7 +37,7 @@ I'm already manually doing this in a bunch of repositories, automate that would 
 
 ### Development
 
-Helper command to keep running the program as a make changes to it.
+Helper command to keep running the program as you make changes to it.
 
 ```bash
 ls main.go | entr go run main.go
